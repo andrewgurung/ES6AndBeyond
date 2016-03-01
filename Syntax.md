@@ -153,6 +153,44 @@ foo( 1, 2, 3, 4, 5 ); // 1 2 [3,4,5]
 ```
 
 ## Default Parameter Values
+- Syntax: `fn(param = value, ..)`
+
+Consider Pre-ES6
+```js
+function foo(x,y) {
+  x = x || 11;
+  y = y || 31;
+  console.log( x + y );
+}
+foo();              // 42
+foo( null, 6 );     // 17
+foo( 0, 42 );       // 53 <-- Oops, not 42
+
+function bar(x,y) {
+    x = (x !== undefined) ? x : 11;
+    y = (y !== undefined) ? y : 31;
+
+    console.log( x + y );
+}
+
+bar( 0, 42 );           // 42
+bar( undefined, 6 );    // 17
+```
+
+Using Default Parameter Values
+```js
+function foo(x = 11, y = 31) {
+  console.log( x + y );
+}
+foo();               // 42
+foo( null, 6 );      // 6 <-- Oops, not 17. null coerces to 0
+foo( 0, 42 );        //42
+foo( undefined, 6 );  // 17
+```
+
+### Default Value Expressions
+
+
 ## Destructuring
 ## Object Literal Extensions
 ## Template Literals
