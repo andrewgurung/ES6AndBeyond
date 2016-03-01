@@ -23,6 +23,7 @@ console.log( a ); // 2
 - Use `let` and a pair of `{..}` to create a scope
 - Always put `let` declaration(s) at the very top of a dedicated `{..}` block
 - `let` declarations are not initialized until they appear in the block
+- `let` variables are not `hoisted`
 
 ```js
 var a = 2;
@@ -52,7 +53,7 @@ console.log( a ); // 2
 }
 ```
 
-  #### `let` + `for`
+#### `let` + `for`
   - The `let` in `for` loop header redeclares a new `i` for each iteration
   - Whereas `var` will only have a single `i` closed over in the outer scope
 
@@ -77,7 +78,43 @@ console.log( a ); // 2
   }
   funCollection[3](); // 3
   ```
+
 ### `const` Declarations
+- A variable that is read-only after its initial value is set
+- Assignment is Frozen, **NOT** the value itself
+  Eg: Complex value such as object or array can still  be modified
+- Block-scoped
+
+```js
+{
+  const a = 2;
+  console.log( a ); // 2
+  // 1. Reassignment error
+  a = 3; //TypeError
+
+  // 2. Array as constant: modified
+  const arr1 = [1, 2, 3];
+  arr1.push( 4 );
+  console.log( arr1 ); // [1,2,3,4]
+  a = 42; //Type Error
+}
+```
+
+### Block-scoped Functions
+- Functions declared inside a `{..}` block is blocked-scoped there
+- Unlike `let` declarations, block-scoped functions are `hoisted`
+
+```js
+{
+  foo(); // Foo Printed
+
+  function foo() {
+    console.log( "Foo Printed!" );
+  }
+}
+
+foo(); // ReferenceError
+```
 
 ## Spread / Rest
 ## Default Parameter Values
