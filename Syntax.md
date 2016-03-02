@@ -153,6 +153,7 @@ foo( 1, 2, 3, 4, 5 ); // 1 2 [3,4,5]
 ```
 
 ## Default Parameter Values
+- Functions can have default parameter values
 - Syntax: `fn(param = value, ..)`
 
 Consider Pre-ES6
@@ -189,7 +190,32 @@ foo( undefined, 6 );  // 17
 ```
 
 ### Default Value Expressions
+- Functions can have default values other than simple primitives like `31`
+- They can be any valid expression, even a function call
+- Default Expressions are lazily evaluated only if parameter's argument is missing or is `undefined`
+- Subtle detail: Default expressions first matches the formal parameter's scope `(..){..} bubble` before looking to an outer scope
 
+```js
+function bar(val) {
+  console.log( "Bar Called!" );
+  return y + val;
+}
+
+function foo(x = y + 3, z = bar( x )) {
+  console.log( x, z );
+}
+
+var y = 5;
+foo();  // Bar Called!
+        // 8 13
+
+foo( 10 ); // Bar Called!
+          // 10 15
+
+y = 6;
+foo( undefined, 10 ); // Bar Called!
+                      // 9 10
+```
 
 ## Destructuring
 ## Object Literal Extensions
