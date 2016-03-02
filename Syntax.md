@@ -218,6 +218,64 @@ foo( undefined, 10 ); // Bar Called!
 ```
 
 ## Destructuring
+- Decomposing array and objects into separate variable assignments
+- `[a, b, c]` or `{ x: x, y: y, z: z }` on the left hand side of the `=` assignment
+- Eliminates need of temporary variable
+- Can be thought as `structured assignment`
+
+Before ES6:
+
+```js
+function foo() {
+  return [1, 2, 3];
+}
+
+// Temporary variable to hold array
+var tempArray = foo();
+var a = tempArray[0],
+    b = tempArray[1],
+    c = tempArray[2];
+console.log( a, b, c ); // 1 2 3
+
+function bar() {
+  return {
+    x: 4,
+    y: 5,
+    z: 6
+  }
+}
+// Temporary variable to hold Object
+var tempObject = bar();
+var x = tempObject.x,
+    y = tempObject.y,
+    z = tempObject.z;
+
+console.log( x, y, z );  // 4 5 6
+```
+
+ES6 Destructuring:
+```js
+function foo() {
+  return [1, 2, 3];
+}
+
+// 1. Array Destructuring
+var [a, b, c] = foo();
+console.log( a, b, c ); // 1 2 3
+
+function bar() {
+  return {
+    x: 4,
+    y: 5,
+    z: 6
+  }
+}
+// 2. Object Destructuring
+var {x: x, y: y, z: z} = bar();
+console.log( x, y, z );  // 4 5 6
+
+```
+
 ## Object Literal Extensions
 ## Template Literals
 ## Arrow Functions
