@@ -354,11 +354,18 @@ var ten = 10;
 [ten, five] = [five, ten];
 console.log(five); // 10
 console.log(ten); // 5
+
+// 7. Spreading
+var spreadTest = [2,3,4];
+var [b, ...c] = spreadTest;
+console.log( b );     // 2
+console.log( c );     // [3,4]
 ```
 
 ### Destructuring Assignment Expression
 - Assignment expression with object or array destructuring value is the full righthand object/array value
 - Helps in chain destructuring assignment expressions
+- Default value assignment
 
 ```js
 var o = { a:1, b:2, c:3 },
@@ -378,7 +385,24 @@ var arr1 = [4, 5, 6],
 
 console.log( a, b, c );         // 1 2 3
 console.log( x, y, z );         // 4 5 4
+
+// Default value assignment
+var [ a = 3, b = 6, c = 9, d = 12 ] = arr1;
+console.log( a, b, c, d );    // 4 5 6 12
+
+// Flatten out object namespace
+var App = {
+  model: {
+    User: function() {}
+  }
+}
+
+// instead of: var User = App.model.User;
+var { model: { User } } = App;
 ```
+
+### Destructuring Parameters
+
 
 ## Object Literal Extensions
 ## Template Literals
