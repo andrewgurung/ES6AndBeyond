@@ -273,8 +273,34 @@ function bar() {
 // 2. Object Destructuring
 var {x: x, y: y, z: z} = bar();
 console.log( x, y, z );  // 4 5 6
-
 ```
+
+### Object Destructuring: Property Assignment Pattern
+- Instead of `target <-- source`, the pattern for object destructing is `source --> target`
+- Train your brain for a flipped syntactic pattern
+- If the source and target property names matches, you can use short-hand technique
+
+```js
+function bar() {
+  return {
+    // Regular object assignment is always target <-- source
+    x: 4,
+    y: 5,
+    z: 6
+  }
+}
+
+// 1. Flipped pattern
+//    Source --> Target. Example   x:bam
+var {x: bam, y: baz, z: bap} = bar();
+console.log( bam, baz, bap ); // 4 5 6
+console.log( x, y , z );  // ReferenceError
+
+// 2. Short-hand assignment
+var {x, y, z} = bar();
+console.log( x, y , z ); // 4 5 6
+```
+
 
 ## Object Literal Extensions
 ## Template Literals
