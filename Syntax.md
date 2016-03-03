@@ -402,7 +402,31 @@ var { model: { User } } = App;
 ```
 
 ### Destructuring Parameters
+```js
+// 1. Array Destructuring for parameters including default value
+function foo( [ x, y, z = 10 ] ) {
+  console.log( x, y, z);
+}
 
+foo( [1, 2, 3] ); // 1 2 3
+foo( [1] ); // 1 undefined 10
+
+// 2. Object Destructuring for parameters
+function bar( { x, y, z = 10 } ) {
+  console.log( x, y, z);
+}
+
+bar( { x: 1, y: 2, z: 3} ); // 1 2 3
+bar( { x: 1 } ); // 1 undefined 10
+
+// 3. Possible variation with spread
+function f3([ x, y, ...z ], ...w) {
+  console.log( x, y, z, w );
+}
+
+f3( [] ); // undefined undefined [] []
+f3( [1,2,3,4], 5, 6 ); // 1 2 [3, 4] [5, 6]
+```
 
 ## Object Literal Extensions
 ## Template Literals
