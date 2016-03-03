@@ -301,6 +301,84 @@ var {x, y, z} = bar();
 console.log( x, y , z ); // 4 5 6
 ```
 
+### Assignment, Mappings/Transformations and Swapping
+- Destructuring is a general operation, not just declaration
+- The purpose of destructuring is not just less typing, but more declarative readability
+- Object to Array Mapping
+- Array to Object Mapping
+- Swapping without temporary variable
+
+```js
+function foo() {
+  return [1, 2, 3];
+}
+
+function bar() {
+  return {
+    // Regular object assignment is always target <-- source
+    x: 4,
+    y: 5,
+    z: 6
+  }
+}
+
+// 1. Declarations
+var a, b, c, x, y, z;
+
+// 2. Array assignment
+[a,b,c] = foo();
+console.log( a, b, c ); // 1 2 3
+
+// 3. Object assignment
+// Must include `(..)` so that the inner `{..}` isn't taken as a block statement instead of an object
+({x, y, z} = bar());
+console.log( x, y, z); // 4 5 6
+
+// 4. Object to Array Mapping
+var obj1 = {x: 4, y: 5, z: 6};
+var arr1 = [];
+// source --> target
+({x: arr1[0], y: arr1[1], z: arr1[2]} = obj1);
+console.log(arr1); // [4, 5, 6]
+
+// 5. Array to Object Mapping
+var arr1 = [4, 5, 6];
+var obj2 = {};
+
+[obj2.x, obj2.y, obj2.z] = arr1;
+console.log(obj2); //  {x: 4, y: 5, z: 6}
+
+// 6. Swapping
+var five = 5;
+var ten = 10;
+[ten, five] = [five, ten];
+console.log(five); // 10
+console.log(ten); // 5
+```
+
+### Destructuring Assignment Expression
+- Assignment expression with object or array destructuring value is the full righthand object/array value
+- Helps in chain destructuring assignment expressions
+
+```js
+var o = { a:1, b:2, c:3 },
+    a, b, c, p;
+
+p = {a, b, c} = o;
+// `p` and `o` points to the same reference
+console.log( a, b, c );     // 1 2 3
+console.log( p === o );     // true
+
+// Chain destructuring assignment
+var arr1 = [4, 5, 6],
+    x, y, z,
+    o = { a:1, b:2, c:3 };
+( {a} = {b,c} = o );
+[x,y] = [z] = arr1;
+
+console.log( a, b, c );         // 1 2 3
+console.log( x, y, z );         // 4 5 4
+```
 
 ## Object Literal Extensions
 ## Template Literals
