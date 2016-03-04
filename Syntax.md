@@ -198,7 +198,7 @@ foo( undefined, 6 );  // 17
 ```js
 function bar(val) {
   console.log( "Bar Called!" );
-  return y + val;
+  return yji + val;
 }
 
 function foo(x = y + 3, z = bar( x )) {
@@ -429,6 +429,123 @@ f3( [1,2,3,4], 5, 6 ); // 1 2 [3, 4] [5, 6]
 ```
 
 ## Object Literal Extensions
+- ES6 adds a bunch of extensions to its `{..}` object Literal
+
+### Concise Properties
+The old way:
+
+```js
+var x = 2, y = 3,
+    o = {
+      x: x,
+      y: y
+    };
+```
+
+The ES6 way:
+
+```js
+var x = 2, y = 3,
+    o = {
+      x,
+      y
+    };
+```
+
+### Concise Methods
+The old way:
+
+```js
+var o = {
+  x: function() {
+
+  },
+  y: function() {
+
+  }
+};
+```
+
+The ES6 way:
+
+```js
+var o = {
+  x() {
+
+  },
+  y() {
+
+  }
+}
+```
+
+### Concise Methods: Anonymous Function
+- Concise methods are anonymous functions
+- Best Practice: Use them if you never need recursion or event binding
+
+Traditional way
+```js
+// Subtract the smaller from the bigger number
+function runSomething(o) {
+    var x = Math.random(),
+        y = Math.random();
+
+    return o.something( x, y );
+}
+
+var x = runSomething( {
+    something: function something(x,y) {
+        if (x > y) {
+            // recursively call with `x`
+            // and `y` swapped
+            return something( y, x );
+        }
+
+        return y - x;
+    }
+} );
+
+console.log(x); // 0.2334036862011999
+```
+
+Concise Method:
+```js
+function runSomething(o) {
+    var x = Math.random(),
+        y = Math.random();
+
+    return o.something( x, y );
+}
+
+var x = runSomething( {
+    something(x,y) {
+        if (x > y) {
+            // recursively call with `x` and `y` swapped
+            return something( y, x );
+        }
+
+        return y - x;
+    }
+} );
+
+console.log(x); // Reference Error
+```
+
+The above ES6 snippet is interpreted as:
+- The recursive call `return something( y, x )` cannot find the `something` due to anonymous function name
+
+```js
+runSomething( {
+    something: function(x,y){
+        if (x > y) {
+            return something( y, x );
+        }
+
+        return y - x;
+    }
+} );
+```
+
 ## Template Literals
 ## Arrow Functions
 ## for..of Loops
