@@ -598,6 +598,57 @@ o2.foo();     // o1:foo
 ```
 
 ## Template Literals
+- New type of string literal with the `` ` `` backtick as delimiter
+- Instead of templating, we are interpolating (parsing and evaluating)
+- `` `..` `` string literal is automatically evaluated inline
+
+```js
+var name = "Jon";
+
+// 1. String literal
+var greeting = `Hello ${name}!`;
+console.log( greeting );        // Hello Jon!
+console.log( typeof greeting ); // string
+
+// 2. Multiple lines: Preserving line breaks
+var text =
+`Now is the time for all good men
+to come to the aid of their
+country!`;
+
+console.log( text );
+/* Output
+--------------------------------
+Now is the time for all good men
+to come to the aid of their
+country!
+*/
+```
+
+### Interpolated Expression
+- Any valid expression is allowed inside `${..}` in an interpolated string literal including nested interpolated string literals
+- Interpolated string literal is just lexically scoped where it appears
+
+```js
+function upper(s) {
+  return s.toUpperCase();
+}
+
+var who = "reader";
+
+var text =
+`A very ${upper( "warm" )} welcome
+to all of you ${upper(`${who}s`)}!
+`;
+
+console.log( text );
+/* Output
+--------------------------------
+A very WARM welcome
+to all of you READERS!
+*/
+```
+
 ## Arrow Functions
 ## for..of Loops
 ## Regular Expression Extensions
