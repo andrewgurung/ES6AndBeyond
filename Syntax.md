@@ -546,6 +546,57 @@ runSomething( {
 } );
 ```
 
+### Computed Property Names
+- Specify an expression whose computed value is the property name
+
+```js
+var prefix = "user_";
+
+var o = {
+  baz: function() {},
+  [ prefix + "foo" ]: function() { console.log( "USER FOO" ) },
+  [ prefix + "bar" ]: function() {}
+};
+
+o.user_foo(); // USER FOO
+```
+
+### Setting `[[Prototype]]`
+- Setting `[[Prototype]]` of an object as a part of object literal declaration
+- Alternate Approach: Use `Object.setPrototypeOf(..)`
+- Warning: Do not use o.__proto__ since that form is both a getter and setter
+
+```js
+var o1 = { };
+
+var o2 = {
+  __proto__: o1
+};
+```
+
+### Object `super`
+- `super` is only allowed in concise methods
+- Must be of `super.xxx` form (property/method access), not `super()` form
+
+```js
+var o1 = {
+  foo() {
+    console.log( "o1:foo" );
+  }
+};
+
+var o2 = {
+  foo() {
+    super.foo();
+    console.log( "o2:foo" );
+  }
+};
+
+Object.setPrototypeOf( o2, o1 );
+o2.foo();     // o1:foo
+              // o2:foo
+```
+
 ## Template Literals
 ## Arrow Functions
 ## for..of Loops
