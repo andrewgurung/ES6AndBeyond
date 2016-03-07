@@ -650,6 +650,41 @@ to all of you READERS!
 ```
 
 ## Arrow Functions
+- Frustrations associated with `this`-based programming is the motivation for new ES6 `=>` arrow function
+- Arrow function definition consists of
+  - A parameter list `(..)` with zero or more parameters
+  - Followed by the `=>` marker
+  - Followed by a function body
+    - Body only needs to be enclosed by `{..}` if there's more than one expression, or consists of non-expression
+    - If there is only one expression and `{..}` is **omitted**, it implies `return` in front of the expression
+- Arrow functions are always **anonymous** function expressions
+- Capabilities such as default values, destructing, rest parameters etc applies
+- Best Practice: The longer the function, the less `=>` helps; the shorter the function, the more `=>` shines
+
+Consider a simple arrow function where:
+- The arrow function is `(x,y) => x + y`
+- Referenced by the variable `foo`
+
+```js
+function foo(x,y) {
+  return x + y;
+}
+
+// Arrow function
+var foo = (x,y) => x + y;
+
+// More Arrow function variations
+var f1 = () => 12;
+var f2 = x => x * 2;
+var f3 = (x,y) => {
+  var z = x * 2 + y;
+  y++;
+  x *= 3;
+  return (x + y + z) / 2;
+};
+```
+
+
 ## for..of Loops
 ## Regular Expression Extensions
 ## Number Literal Extensions
