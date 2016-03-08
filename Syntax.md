@@ -779,6 +779,29 @@ var PageHandler = {
 ```
 
 ## for..of Loops
+- `for..of` loops over set of `iterable` values produced by an `iterator` or values which can be boxed to an iterable object
+- `for..in` loops over `keys/indexes` in an array
+- `for..of` loops over `values` in an array
+- Default iterables in JavaScript: Arrays, Strings, Generators, Collections
+- Warning: Plain objects are not by default suitable for `for..loop` looping
+
+```js
+var a = ["a","b","c","d","e"];
+for(var indx in a) {
+  console.log( indx ); // 0 1 2 3 4
+}
+
+for(var val of a) {
+  console.log( val ); // "a" "b" "c" "d" "e"
+}
+
+// Iterating a string
+for (var c of "hello") {
+    console.log( c );
+}
+// "h" "e" "l" "l" "o"
+```
+
 ## Regular Expression Extensions
 ## Number Literal Extensions
 ## Unicode
