@@ -682,8 +682,101 @@ var f3 = (x,y) => {
   x *= 3;
   return (x + y + z) / 2;
 };
+
+var numbers = [1, 2, 3, 4, 5];
+var timesTwo = numbers.map((item) => item * 2); // Extra parens around `(item)` is optional but recommended
+console.log( timesTwo ); // [2, 4, 6, 8, 10]
+```
+### Not Just Shorter Syntax, But this
+- `=>` arrow functions are popular for terser code by dropping `function`, `return` and `{..}`
+- But `=>` were primarily designed to solve a common `this` problem
+- Arrow functions use the `lexical this` whose value can be determined at compile time based on its position in the code
+- Arrow-functions use lexical scope for `this` binding
+- Inherits `this` binding from its enclosing function call
+- Syntactic replacement of `self = this` or `.bind(..)`
+- Lexical binding of arrow-functions cannot be overriden even with `new` operator
+
+Reference: https://www.nczonline.net/blog/2013/09/10/understanding-ecmascript-6-arrow-functions/
+Consider:
+- `PageHandler` object that handles interactions on the page
+- `init()` set up the interactions
+
+Problem:
+-  `this.doSomething(..)` points to global object instead of PageHandler
+
+```js
+var PageHandler = {
+
+    id: "123456",
+
+    init: function() {
+        document.addEventListener("click", function(event) {
+            this.doSomething(event.type);     // error
+        }, false);
+    },
+
+    doSomething: function(type) {
+        console.log("Handling " + type  + " for " + this.id);
+    }
+};
 ```
 
+`.bind()` solution:
+
+```js
+var PageHandler = {
+
+    id: "123456",
+
+    init: function() {
+        document.addEventListener("click", (function(event) {
+            this.doSomething(event.type);
+        }).bind(this), false);
+    },
+
+    doSomething: function(type) {
+        console.log("Handling " + type  + " for " + this.id);
+    }
+};
+```
+
+`that` Solution:
+
+```js
+var PageHandler = {
+    that: this,
+
+    id: "123456",
+
+    init: function() {
+        document.addEventListener("click", function(event) {
+            that.doSomething(event.type);     // error
+        }, false);
+    },
+
+    doSomething: function(type) {
+        console.log("Handling " + type  + " for " + this.id);
+    }
+};
+```
+
+`arrow` Solution:
+
+```js
+var PageHandler = {
+
+    id: "123456",
+
+    init: function() {
+        document.addEventListener("click",
+                event => this.doSomething(event.type), false);
+    },
+
+    doSomething: function(type) {
+        console.log("Handling " + type  + " for " + this.id);
+    }
+};
+```
 
 ## for..of Loops
 ## Regular Expression Extensions
