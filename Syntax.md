@@ -803,6 +803,28 @@ for (var c of "hello") {
 ```
 
 ## Regular Expression Extensions
+
+ES6 introduces two new flags for regular expressions:
+
+1. `u` enables various Unicode-related features
+2. `y` enables sticky matching
+
+### Unicode Flag
+- Setting the `u` flag on a regular expression enables the use of ES6 Unicode code point escapes `(\u{…})` in the pattern
+- Prior to ES6, regular expressions could only match based on Basic Multilingual Plane (BMP) characters
+- Extended characters had to be represented as two separate characters
+
+Consider: `/^.-clef/` returns `true` only if there is a single character in front of `-clef`
+
+```js
+// 1. Using regular expression
+/^.-clef/ .test( "𝄞-clef" );     // false
+
+// 2. Using unicode `u` flag
+/^.-clef/u.test( "𝄞-clef" );     // true
+```
+
+
 ## Number Literal Extensions
 ## Unicode
 ## Symbols
