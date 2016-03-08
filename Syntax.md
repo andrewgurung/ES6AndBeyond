@@ -824,6 +824,55 @@ Consider: `/^.-clef/` returns `true` only if there is a single character in fron
 /^.-clef/u.test( "𝄞-clef" );     // true
 ```
 
+### Sticky Flag
+- Sticky means to search in strings only from the index indicated by the `lastIndex` property of the regular expression
+- `y` implies a virtual anchor that is relative to exactly the `lastIndex` position
+
+```js
+var re2 = /foo/y,       // <-- notice the `y` sticky flag
+    str = "++foo++";
+
+re2.lastIndex;          // 0
+re2.test( str );        // false -- "foo" not found at `0`
+re2.lastIndex;          // 0
+
+re2.lastIndex = 2;
+re2.test( str );        // true
+re2.lastIndex;          // 5 -- updated to after previous match
+
+re2.test( str );        // false
+re2.lastIndex;          // 0 -- reset after previous match failure
+```
+
+#### Sticky Versus Global
+- `g` global pattern matches with `exec(..)` starting from `lastIndex`'s current value
+- `g` matches are free to move ahead in their matching. Doesn't have to match exactly beginning from `lastIndex`'s current position
+- `sticky` mode expression would fail because it would not be allowed to move ahead
+- `g` global `match(..)` returns all the matches at once
+- `sticky` `match(..)` returns one-at-a-time progressive matching. Just make sure `lastIndex` is always in the right position
+
+#### Regular Expression flags
+- The expression's flags is returned in this order: "gimuy" regardless of the original pattern
+
+Prior to ES6:
+
+```js
+var re = /foo/ig;
+
+re.toString();          // "/foo/ig"
+
+var flags = re.toString().match( /\/([gim]*)$/ )[1];
+
+flags;                  // "ig"
+```
+
+ES6 `flag` property:
+
+```js
+var re = /foo/ig;
+
+re.flags;               // "gi"
+```
 
 ## Number Literal Extensions
 ## Unicode
