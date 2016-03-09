@@ -875,5 +875,32 @@ re.flags;               // "gi"
 ```
 
 ## Number Literal Extensions
+- Apart from decimal and hexadecimal form, ES6 adds some new forms
+- An official octal form
+- A brand new binary form
+- An amended hexadecimal form
+
+```js
+// 1. The new ES6 numbers
+var dec = 42,
+    oct = 0o52,         // or `0O52`
+    hex = 0x2a,         // or `0X2a`
+    bin = 0b101010;     // or `0B101010`
+
+// 2. String representation form are converted to number equivalent
+Number( "42" );         // 42
+Number( "0o52" );       // 42
+Number( "0x2a" );       // 42
+Number( "0b101010" );   // 42
+
+// 3. Converting a number to different forms
+var a = 42;
+
+a.toString();           // "42" -- also `a.toString( 10 )`
+a.toString( 8 );        // "52"
+a.toString( 16 );       // "2a"
+a.toString( 2 );        // "101010"
+```
+
 ## Unicode
 ## Symbols
