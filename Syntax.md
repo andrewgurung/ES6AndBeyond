@@ -1036,3 +1036,31 @@ console.log( desc ); // event.login
 ```
 
 ### Symbols as Object Properties
+- Symbols are stored in special way as object property
+- Symbols are not enumerable
+- The specification uses a `@@` prefix notation to refer to built-in symbols
+  - Eg: `@@iterator`, `@@toPrimitive`
+
+```js
+// 1. Store
+var o = {
+  foo: 42,
+  [ Symbol( "bar" ) ]: "hello world",
+  baz: true
+};
+
+Object.getOwnPropertyNames( o );    // [ "foo","baz" ]
+
+// 2. Retrieve
+Object.getOwnPropertySymbols( o );  // [ Symbol(bar) ]
+```
+
+### Built-In Symbols
+- ES6 comes with pre-defined built-in symbols
+- These symbols are not registered in the global symbol registry
+- Instead they are stored in the `Symbol` function object
+
+```js
+var a = [1,2,3];
+a[Symbol.iterator]; // native function
+```
