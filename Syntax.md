@@ -903,4 +903,22 @@ a.toString( 2 );        // "101010"
 ```
 
 ## Unicode
+- Basic Multilingual Plane (BMP): Unicode characters that range from `0x0000` to `0xFFFF`[ie. 4 hexadecimal chars] contain all standard printed characters
+  - Syntax: "\uhexadecimal"
+- Extended BMP ranges up to `0x10FFFF` [i.e highest 6 hexadecimal chars] which includes `astral` symbols like 💩 U+1F4A9 poo
+  - Syntax: "\u{hexadecimal}"
+
+```js
+// 1. Snowman Prior ES6
+var snowman = "\u2603";
+console.log( snowman );  // ☃
+
+// 2. Surrogate pair: Two unicode-escaped chars side by side which JS interprets together as a single astral char
+var surrogatePoo = '\uD83D\uDCA9';
+console.log( surrogatePoo );  // 💩
+
+// 3. ES6 expression
+var poo = '\u{1F4A9}';
+console.log( poo );  // 💩
+```
 ## Symbols
