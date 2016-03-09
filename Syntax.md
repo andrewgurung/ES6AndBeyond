@@ -1003,7 +1003,6 @@ var symObj = Object( sym );
 symObj instanceof Symbol;   // true
 ```
 
-
 ### Use case of Symbol:
 - String-like value that can't collide with any other value
 - Use as a constant
@@ -1019,3 +1018,21 @@ evthub.listen( EVT_LOGIN, function(data){
     // ..
 } );
 ```
+
+### Symbol Registry
+- Symbol values can be created with `global symbol registry` to help code to access symbols from any part of the application
+- `Symbol.for(..)` returns an existing symbol from `global symbol registry` or it creates one if not found
+- Best Practice: To avoid collision, make your symbol descriptions unique
+  - Eg: Add prefix/context/namespacing information
+- Finding description text  using `Symbol.keyFor(..)`
+
+```js
+const EVT_LOGIN = Symbol.for( "event.login" );
+
+console.log( EVT_LOGIN );       // Symbol(event.login)
+
+var desc = Symbol.keyFor( EVT_LOGIN );
+console.log( desc ); // event.login
+```
+
+### Symbols as Object Properties
