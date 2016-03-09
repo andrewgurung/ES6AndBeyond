@@ -947,6 +947,35 @@ s1 === s2.normalize();          // true
 ```
 
 ### Character Positioning
-- 
+- Pre-ES6 provides charAt(..) to return a character at a given position but doesn't take into account of astral character and combining marks
+
+```js
+var s1 = "ab\u{1d49e}d";
+console.log( s1 );      // "ab𝒞d"
+s1.charAt( 3 );         // "" <-- unprintable surrogate
+
+// ES6 hack
+[...s1.normalize()][2]; // "𝒞"
+
+// codePointAt(..)
+s1.normalize().codePointAt( 2 ).toString( 16 ); // 1d49e
+
+// fromCodePoint(..)
+String.fromCodePoint( 0x1d49e );    // "𝒞"
+
+// Combination
+String.fromCodePoint( s1.normalize().codePointAt( 2 ) ); // "𝒞"
+```
+
+### Unicode Identifier Names
+```js
+// Pre-ES6
+var \u03A9 = 42; // same as: var Ω = 42;
+console.log(\u03A9); // 42
+
+// ES6
+var \u{2B400} = 42;
+console.log(\u{2B400});
+```
 
 ## Symbols
