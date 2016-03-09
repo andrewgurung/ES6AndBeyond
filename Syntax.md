@@ -920,5 +920,33 @@ console.log( surrogatePoo );  // 💩
 // 3. ES6 expression
 var poo = '\u{1F4A9}';
 console.log( poo );  // 💩
+
+// 4. JavaScript string operation still treats astral characters as two individual BMP characters
+var poo1 = "💩";
+console.log( poo1.length ); // 2
+
+// 5. Temp workaround: Spread array literal to array of string symbols
+console.log( [...poo1].length ); // 1
+
+// 6. Combining Diacritical Marks: `length` trick doesn't work
+var s1 = "\xE9",
+    s2 = "e\u0301";
+
+console.log( s1 );              // "é"
+console.log( s2 );              // "é"
+
+console.log( [...s1].length ); // 1
+console.log( [...s2].length ); // 2
+
+// 7. String#normalize(..) utility
+s1.normalize().length;          // 1
+s2.normalize().length;          // 1
+
+s1 === s2;                      // false
+s1 === s2.normalize();          // true
 ```
+
+### Character Positioning
+- 
+
 ## Symbols
