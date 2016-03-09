@@ -979,3 +979,43 @@ console.log(\u{2B400});
 ```
 
 ## Symbols
+- A new primitive type added to ES6: `symbol`
+- Syntax: `Symbol("optional description string")`
+- Unlike other primitive types, symbols don't have literal form
+  - But you cannot and should not use `new`
+- The internal value of a symbol itself -- referred as its `name` is hidden and unobtainable
+  - This symbol value is an automatically generated, unique string value
+- Implicit string coercion of symbols is not allowed
+  - Must either use `String(..)` or `toString()`
+
+```js
+// 1. Symbol
+var sym = Symbol( "some optional description" );
+typeof sym; // "symbol"
+
+sym.toString(); // "Symbol(some optional description)"
+
+// 2. Primitive datatype
+sym instanceof Symbol;      // false
+
+// 3. Boxed wrapper object
+var symObj = Object( sym );
+symObj instanceof Symbol;   // true
+```
+
+
+### Use case of Symbol:
+- String-like value that can't collide with any other value
+- Use as a constant
+- Cannot be duplicated (accidentally or otherwise) by any other value
+
+```js
+const EVT_LOGIN = Symbol( "event.login" );
+```
+
+Use EVT_LOGIN in place of a generic string literal like "event.login":
+```js
+evthub.listen( EVT_LOGIN, function(data){
+    // ..
+} );
+```
