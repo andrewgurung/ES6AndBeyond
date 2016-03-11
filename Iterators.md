@@ -59,3 +59,5 @@ var it3 = map.entries();
 console.log(it2.next()); // { value:[ "foo", 42 ],  done:false}
 console.log(it3.next()); // { value:[ "foo", 42 ],  done:false}
 ```
+
+### Custom Iterators
