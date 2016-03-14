@@ -61,3 +61,34 @@ console.log(it3.next()); // { value:[ "foo", 42 ],  done:false}
 ```
 
 ### Custom Iterators
+
+### Iterator Consumption
+- ES6 has structures other than `for..of` loop to consume Iterator
+
+```js
+var a = [1,2,3,4,5];
+
+// 1. ... spread operator fully exhausts an iterator
+function foo(x,y,z,w,p) {
+  console.log(x + y + z + w + p);
+}
+foo( ...a ); // 15
+
+// 2. spread an iterator inside an array
+var b = [ 0, ...a, 6 ];
+b; // [0,1,2,3,4,5,6]
+
+// 3. Array destructuring
+var it = a[Symbol.iterator]();
+
+var [x,y] = it;
+var [z, ...w] = it;
+
+// is `it` fully exhausted? YES
+it.next(); // { value: undefined, done: true }
+
+console.log( x ); // 1
+console.log( y ); // 2
+console.log( z ); // 3
+console.log( w ); // [4,5]
+```
