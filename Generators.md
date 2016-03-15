@@ -17,3 +17,52 @@ function*foo()   { .. }
 ```
 
 ### Executing a Generator
+- Execute like a normal function but doesn't run the code in the Generator
+- Instead produces an iterator that will control the generator to execute its code
+
+```js
+foo();
+foo( 5, 10 ); // Passing arguments
+
+// Executing a generator
+var it = foo();
+it.next();
+```
+
+### yield
+- Keyword used inside generators to signal the pause point
+- Can appear zero or more times
+- `yield ..` can also be an expression that sends out a value  
+  Eg: `yield Math.random();`
+
+Consider:
+In the following `*foo()` generator
+- The first two lines (assignments) would run at the beginning
+- `yield` would pause the generator
+- When resumed, the last line would run
+
+```js
+function *foo(){
+  var x = 10;
+  var y = 20;
+
+  yield;
+
+  var z = x + y;
+}
+```
+
+### yield *
+- A very different mechanism, called `yield delegation`
+- `yield * ..` requires an iterable
+- Invokes that iterable's iterator, and delegates its own host generator's control to that iterator until it's exhausted
+
+Consider:
+- [1,2,3] value produces an iterator
+- `*foo()` generator will yield those values out as it's consumed
+
+```js
+function *foo() {
+    yield *[1,2,3];
+}
+```
