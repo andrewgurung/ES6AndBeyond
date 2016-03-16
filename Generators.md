@@ -66,3 +66,28 @@ function *foo() {
     yield *[1,2,3];
 }
 ```
+
+### Iterator Control
+- An iterator attached to a generator can be consumed with a `for..of` loop
+
+```js
+function *foo(){
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+// 1. Manual iteration
+var it = foo();
+it.next();              // { value: 1, done: false }
+it.next();              // { value: 2, done: false }
+it.next();              // { value: 3, done: false }
+
+it.next();              // { value: undefined, done: true }
+
+// 2. Consume iterator attached to a generator
+for(var v of foo()) {
+  console.log( v );
+}
+// 1 2 3
+```
