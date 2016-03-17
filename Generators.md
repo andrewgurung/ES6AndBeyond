@@ -78,6 +78,7 @@ function *foo(){
 }
 
 // 1. Manual iteration
+// Three yield and four next() calls
 var it = foo();
 it.next();              // { value: 1, done: false }
 it.next();              // { value: 2, done: false }
@@ -88,6 +89,28 @@ it.next();              // { value: undefined, done: true }
 // 2. Consume iterator attached to a generator
 for(var v of foo()) {
   console.log( v );
+} // 1 2 3
+
+// 3. Generator as a producer of values
+function *foobar() {
+    var x = yield 1;
+    var y = yield 2;
+    var z = yield 3;
+    console.log( x, y, z );
 }
-// 1 2 3
+
+var it = foobar();
+
+// start up the generator
+it.next();              // { value: 1, done: false }
+
+// answer first question: What value should I assign to x?
+it.next( "foo" );       // { value: 2, done: false }
+
+// answer second question: What value should I assign to y?
+it.next( "bar" );       // { value: 3, done: false }
+
+// answer third question: : What value should I assign to z?
+it.next( "baz" );       // "foo" "bar" "baz"
+                        // { value: undefined, done: true }
 ```
