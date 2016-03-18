@@ -114,3 +114,25 @@ it.next( "bar" );       // { value: 3, done: false }
 it.next( "baz" );       // "foo" "bar" "baz"
                         // { value: undefined, done: true }
 ```
+
+### Early Completion
+- Iterators attached to generators supports the optional methods that aborts a paused generator immediately:
+  - `return(..)`
+  - `throw(..)`
+
+```js
+function *foo(){
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+var it = foo();
+it.next(); // {value: 1, done: false}
+
+// 1. Returns a value and aborts the generator
+it.return(42); // {value: 42, done: true}
+
+// 2. No longer processes any code or returns any values
+it.next(); // {value: undefined, done: true}
+```
