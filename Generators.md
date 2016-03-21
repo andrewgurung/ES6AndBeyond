@@ -117,21 +117,34 @@ it.next( "baz" );       // "foo" "bar" "baz"
 
 ### Early Completion
 - Iterators attached to generators supports the optional methods that aborts a paused generator immediately:
-  - `return(..)`
+  - `return(..)`: Forces to return a value. Called automatically for `for..of` and `...` operator
   - `throw(..)`
 
 ```js
 function *foo(){
-  yield 1;
-  yield 2;
-  yield 3;
+  try {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  finally {
+    console.log( "cleanup!" );
+  }
 }
+
+for (var v of foo()) {
+    console.log( v );
+}
+// 1 2 3
+// cleanup!
 
 var it = foo();
 it.next(); // {value: 1, done: false}
 
 // 1. Returns a value and aborts the generator
-it.return(42); // {value: 42, done: true}
+
+it.return(42);  // cleanup!
+                // {value: 42, done: true}
 
 // 2. No longer processes any code or returns any values
 it.next(); // {value: undefined, done: true}
