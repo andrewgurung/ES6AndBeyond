@@ -171,3 +171,9 @@ catch(err) {
 }
 it.next();  // { value: undefined, done: true }
 ```
+
+### Generator Uses
+1. Producing a series of values
+  - Use of iterator to control a generator so that some logic can be invoked for each call to `next(..)`
+2. Queue of tasks to perform serially
+  - Represents flow control for the steps in an algorithm
