@@ -36,3 +36,12 @@ var me = (function Hello(name) {
 })( "Andrew" );
 me.greeting(); // Hi Andrew
 ```
+
+### Moving Forward
+- ES6 uses file-based modules
+- API of an ES6 module is static
+- ES6 modules are singletons shared by all other modules
+- Properties and methods are like pointers that are actual bindings
+- Importing a module is similar to statically request it to load (if it hasn't already)
+
+### The New Way
