@@ -45,3 +45,8 @@ me.greeting(); // Hi Andrew
 - Importing a module is similar to statically request it to load (if it hasn't already)
 
 ### The New Way
+The two main new keywords that enable ES6 modules are `import` and `export`
+
+### `export`
+
+### `import`
