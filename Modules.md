@@ -48,5 +48,21 @@ me.greeting(); // Hi Andrew
 The two main new keywords that enable ES6 modules are `import` and `export`
 
 ### `export`
+1. `export` in front of declaration
+2. `export` as an operator with list of bindings to export
+
+Note: 
+- Anything not labeled as `export` stays private inside the scope of the module
+
+```js
+// 1. infront of declaration
+export function foo() { }
+export var awesome = 22;
+
+// 2. as an operator
+var bar = [1,2,3]; // Private scoped unless you export it
+export { bar };
+export { foo, awesome, bar }; // named exports
+```
 
 ### `import`
