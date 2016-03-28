@@ -70,4 +70,19 @@ function foo() { }
 export { foo as bar };
 ```
 
+### Updated binding
+- Binding is actually a reference to or a pointer to the variable itself
+- Importing `awesome` will result in 100 instead of 40
+
+Consider:
+```js
+var awesome = 40;
+export { awesome }
+
+// later
+awesome = 100;
+```
+
+
+
 ### `import`
