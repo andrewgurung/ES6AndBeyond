@@ -83,6 +83,30 @@ export { awesome }
 awesome = 100;
 ```
 
+### `default` export
+- Only one `default` export per definition is allowed
+- Can be exported in two ways
 
+Consider the two snippets
+```js
+function foo() { }
+
+export default foo;
+
+// Alternate
+export default function foo() { }
+```
+Notes:
+- Exporting a binding to the function expression `foo` **value** at the moment, ***not*** the identifier foo
+- Later if `foo` is assigned to a different value, the module import still reveals the function originally exported
+
+And:
+```js
+function foo(){ }
+export { foo as default };
+```
+Notes:
+- `foo` binding is actually a reference to or a pointer to the variable itself
+- If you later change foo's value, the value seen on the import side will also be updated
 
 ### `import`
