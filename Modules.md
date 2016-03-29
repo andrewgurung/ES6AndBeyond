@@ -110,3 +110,15 @@ Notes:
 - If you later change foo's value, the value seen on the import side will also be updated
 
 ### `import`
+- `"foo"` is a module specifier
+- bar and baz identifiers must match named exports on the module's API
+
+```js
+// 1. Importing certain specific named members of a module's API
+import { bar, baz } from "foo";
+bar();
+
+// 2. Rename the bound identifiers
+import { bar as theBarFunc } from "foo";
+theBarFunc();
+```
