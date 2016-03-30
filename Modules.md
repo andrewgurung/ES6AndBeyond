@@ -121,4 +121,10 @@ bar();
 // 2. Rename the bound identifiers
 import { bar as theBarFunc } from "foo";
 theBarFunc();
+
+// 3. Two ways of importing default identifier
+// a. Cleanest way to implicitly import
+import foo from "foo";
+// b. Explicit verbose way of importing
+import { default as foo } from "foo";
 ```
