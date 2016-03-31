@@ -130,5 +130,27 @@ import { default as foo } from "foo";
 
 // 4. Importing the entire API
 import * as foo from "foo";
+// 4.a Default export would be named `default`
+foo.default();
 
+// 5. Declarations are hoisted
+foo();
+import { foo } from "foo";
+
+// 6. Most basic form of import
+// Note: Doesn't actually import any module bindings. It simply loads, compiles and evaluates the "foo" module
+import "foo";
+```
+
+### Loading Modules Outside of Modules
+- One use for interacting directly with the module loader is if a non-module needs to load a module.
+
+```js
+// normal script loaded in browser via `<script>`,
+// `import` is illegal here
+
+Reflect.Loader.import( "foo" ) // returns a promise for "foo"
+.then( function(foo){
+  foo.bar();
+} );
 ```
