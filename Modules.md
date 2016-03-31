@@ -127,4 +127,8 @@ theBarFunc();
 import foo from "foo";
 // b. Explicit verbose way of importing
 import { default as foo } from "foo";
+
+// 4. Importing the entire API
+import * as foo from "foo";
+
 ```
