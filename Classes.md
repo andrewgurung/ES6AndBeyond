@@ -58,3 +58,61 @@ class Bar extends Foo {
 var b = new Bar( 5, 15, 25 );
 b.gimmeXYZ(); // 1875
 ```
+
+### More on `super`
+- `super` works only with static class hierarchy with no cross pollination
+- Borrowing `b.foo()` and use it in the context of `a` will result in an ugly surprise
+
+```js
+class ParentA {
+  constructor() { this.id = "a"; }
+  foo() { console.log( "ParentA: ", this.id ); }
+}
+
+class ParentB {
+  constructor() { this.id = "b"; }
+  foo() { console.log( "ParentB: ", this.id ); }
+}
+
+class ChildA extends ParentA {
+  foo() {
+    super.foo();
+    console.log( "ChildA: ", this.id );
+  }
+}
+
+class ChildB extends ParentB {
+  foo() {
+    super.foo();
+    console.log( "ChildB: ", this.id );
+  }
+}
+
+var a = new ChildA();
+a.foo();
+
+var b = new ChildB();
+b.foo();
+
+/*
+-----------------
+output
+------------------
+ParentA: a
+ChildA: a
+ParentB: b
+ChildB: b
+*/
+```
+
+Consider cross pollination:
+- this.id reference was dynamically rebound so `: a` is reported in both cases instead of `: b`
+- But `b.foo's` `super.foo()` reference wasn't dynamically rebound, so still reports as `ParentB` instead of `ParentA`
+- `b.foo()` references `super` which is statically bound to the `ChildB`/`ParentB` hierarchy
+```js
+b.foo.call( a );
+// Output
+// -------------
+// ParentB: a
+// ChildB: a
+```
