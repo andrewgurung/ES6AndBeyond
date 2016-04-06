@@ -120,10 +120,24 @@ b.foo.call( a );
 ### Subclass constructor
 - Default constructor is added if not found in classes or subclasses
 - Java does not have subclass constructor automatically call the parent constructor
+- In an ES6 subclass constructor, you cannot access `this` until `super(..)` has been called. Parent constructor is responsible for initializing the instance of `this`
 
-Default subclass constructor:
+Code Snippet:
 ```js
+// 1. Default subclass constructor
 constructor(...args) {
   super(...args);
+}
+
+// 2. Order of super() and this
+class Foo {
+  constructor() { this.a = 1; }
+}
+
+class Bar extends Foo {
+  constructor() {
+    super();
+    this.b = 2; // `this` is not allowed before `super()`
+  }
 }
 ```
