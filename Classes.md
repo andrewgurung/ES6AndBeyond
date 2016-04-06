@@ -141,3 +141,20 @@ class Bar extends Foo {
   }
 }
 ```
+
+### `extend`ing Natives
+- ES6 supports the ability to subclass/extend natives like Array
+- Subclassed Array will have also have the automatically updating `length` property
+
+```js
+class MyCoolArray extends Array {
+  first() { return this[0]; }
+  last() { return this[this.length - 1]; }
+}
+
+var a = new MyCoolArray( 1, 2, 3);
+a.length; // 3
+
+a.first(); // 1
+a.last();  //3
+```
