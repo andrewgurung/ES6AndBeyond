@@ -116,3 +116,5 @@ b.foo.call( a );
 // ParentB: a
 // ChildB: a
 ```
+
+### Subclass constructor
