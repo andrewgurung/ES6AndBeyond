@@ -118,3 +118,12 @@ b.foo.call( a );
 ```
 
 ### Subclass constructor
+- Default constructor is added if not found in classes or subclasses
+- Java does not have subclass constructor automatically call the parent constructor
+
+Default subclass constructor:
+```js
+constructor(...args) {
+  super(...args);
+}
+```
