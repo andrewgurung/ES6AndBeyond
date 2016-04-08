@@ -190,6 +190,7 @@ var b = new Bar();
 
 b.baz();
 // baz: undefined
-
-
 ```
+
+### static
+- `static` methods are added directly to the class's function object, not to the function object's `prototype` object
