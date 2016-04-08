@@ -194,3 +194,33 @@ b.baz();
 
 ### static
 - `static` methods are added directly to the class's function object, not to the function object's `prototype` object
+
+```js
+class Foo {
+  static cool() { console.log("Cool"); }
+  wow() { console.log("Wow"); }
+}
+
+class Bar extends Foo {
+  static awesome() {
+    super.cool();
+    console.log("Awesome");
+  }
+  neat() {
+    super.wow();
+    console.log("Neat");
+  }
+}
+
+Foo.cool();                 // "cool"
+Bar.cool();                 // "cool"
+Bar.awesome();              // "cool"
+                            // "awesome"
+
+var b = new Bar();
+b.neat(); // "wow"
+          // "neat"
+
+b.awesome; // undefined
+b.cool;    // undefined                       
+```
