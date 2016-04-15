@@ -8,6 +8,10 @@
 
 ### Making and Using Promises
 - `Promise(..)` constructor is used to create a promise instance
+- `Promise(..)` constructor takes a single function `pr(..)` which is called immediately
+- `pr(..)` function receives two control functions as arguments
+  - `resolve(..)`
+  - `reject(..)`
 
 ```js
 var p = new Promise( function pr(resolve, reject){
