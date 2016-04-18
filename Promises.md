@@ -18,3 +18,44 @@ var p = new Promise( function pr(resolve, reject){
   //..
 });
 ```
+
+### Code to refactored
+
+- `ajax(..)` utility (error-first style callback)
+
+  ```js
+  function ajax(url, cb) {
+    // Make request to url
+    // Eventually call the cb(..)
+  }
+
+  ajax( "http://random.url", function handler(err, contents) {
+    if (err) {
+      // handle ajax error
+    }
+    else {
+      // handle `contents` success
+    }
+  });
+  ```
+
+- Convert to `promise`
+
+  ```js
+  function ajax(url) {
+    return new Promise( function pr(resolve, reject){
+      // make request, eventually call
+      // either `resolve(..)` or `reject(..)`
+    });
+  }
+
+  ajax("http://random.url")
+  .then(
+    function fullfilled(contents){
+      // handle `contents` success
+    },
+    function rejected(reason) {
+      // handle ajax errors
+    }
+  );
+  ```
