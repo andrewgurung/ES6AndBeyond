@@ -59,3 +59,25 @@ var p = new Promise( function pr(resolve, reject){
     }
   );
   ```
+
+- Promises have a `then(..`) method that accepts one or two callbacks
+    - First function (if present): Treated as the handler if promise is fulfilled successfully. Else use `null` as placeholder for empty success
+    - Second function (if present): Treated as the handler if promise is rejected
+- Both then(..) and catch(..) automatically construct and return another promise instance
+- Short hand for calling `.then(null, handleRejection)` is `catch(handleRejection)`
+```js
+// Return promise through `ajax(..)` helper function
+ajax("http://random.url")
+.then(
+  function fulfilled(contents) {
+    return contents.toUpperCase();
+  },
+  function rejected(reason) {
+    return "Default Value";
+  }
+)
+.then( function fulfilled(data){
+  // handle data from original promise's handlers
+})
+
+```
