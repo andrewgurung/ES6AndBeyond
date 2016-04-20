@@ -19,7 +19,7 @@ var p = new Promise( function pr(resolve, reject){
 });
 ```
 
-### Code to refactored
+### Code to be refactored
 
 - `ajax(..)` utility (error-first style callback)
 
@@ -39,7 +39,7 @@ var p = new Promise( function pr(resolve, reject){
   });
   ```
 
-- Convert to `promise`
+### Convert to `promise`
 
   ```js
   function ajax(url) {
@@ -80,4 +80,21 @@ ajax("http://random.url")
   // handle data from original promise's handlers
 })
 
+```
+
+### Thenables
+- Any object with a `then(..)` function on it
+- `Thenables` are promise-like objects that can interoperate with the Promise mechanism
+- Prior to ES6, there was never any special reservation for methods called `then(..)`. Use caution
+
+Consider a misbehaving thenable:
+- When normal Promises are supposed to only be resolved once, the following thenable fulfillment handler is called repeatedly
+
+```js
+var th = {
+  then: function thener(fulfilled) {
+    // call fulfilled(..) once every 100ms forever
+    setInterval( fulfilled, 100 );
+  }
+}
 ```
