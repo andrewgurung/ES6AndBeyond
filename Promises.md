@@ -98,3 +98,22 @@ var th = {
   }
 }
 ```
+
+### `Promise` API
+Static Promise methods:
+
+1. `Promise.resolve(..)`
+  - Solution to the thenable trust issue
+  - var p1 = Promise.resolve( 42 );
+
+2. `Promise.reject(..)`
+  - Creates an immediately rejected promise
+  - var p1 = Promise.reject( "Oops" );
+
+3. `Promise.all([ .. ])`
+  - Accepts an array of one or more values
+  - Waits for all fulfillments (or the first rejection)
+
+4. `Promise.race([ .. ])`
+  - Accepts an array of one or more values
+  - Waits only for either the first fulfillment or rejection
