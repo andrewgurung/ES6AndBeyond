@@ -117,3 +117,6 @@ Static Promise methods:
 4. `Promise.race([ .. ])`
   - Accepts an array of one or more values
   - Waits only for either the first fulfillment or rejection
+
+
+### Generators + Promises
