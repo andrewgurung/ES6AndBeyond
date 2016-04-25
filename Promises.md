@@ -120,3 +120,46 @@ Static Promise methods:
 
 
 ### Generators + Promises
+- Series of promises in a chain:
+
+```js
+step1()
+.then(
+  step2,
+  step1Failed
+)
+.then(
+  function step3(msg) {
+    return Promise.all( [
+      step3a( msg ),
+      step3b( msg ),
+      step3c( msg )
+    ])
+  }
+)
+.then(step4);
+```
+
+- Expressed with Generator:
+
+```js
+function *main() {
+  try {
+    var ret = yield step1();
+  }
+  catch (err) {
+    ret = yield stepFailed( err );
+  }
+
+  ret = yield step2( ret );
+
+  // step 3
+  ret = yield Promise.all( [
+    step3a( ret ),
+    step3b( ret ),
+    step3c( ret )
+  ]);
+
+  yeild step4( ret );
+}
+```
