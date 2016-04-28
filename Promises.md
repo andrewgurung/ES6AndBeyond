@@ -120,6 +120,7 @@ Static Promise methods:
 
 
 ### Generators + Promises
+- Combination of Promises with generators that fully realizes the benefits of rearranging our async flow control code to de-emphasize and abstract away that ugly callback soup
 - Series of promises in a chain:
 
 ```js
