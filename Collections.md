@@ -22,6 +22,18 @@ var arr8 = new Uint8Array(buf);
 console.log(arr8.length);  // 32  [256/8 bucket]
 ```
 
+#### Endianness
+- The `arr` is mapped using the endian-setting(big-endian or little-endian) of the platform where JS is running
+- Endian means if the lower byte (8-bits) of a multi-byte number is on the right or the left
+- Little-endian is the most common representation on web these days but doesn't guarantee in all browsers
+
+Representing a base-10 number `3085`:
+16-bits binary (Regardless of Endianness) / hexadecimal: 0000110000001101  / 0c0d
+8-bits little-endian / hexadecimal: 0000110100001100 / 0d0c
+8-bits big-endian / hexadecimal: 0000110000001101 / 0c0d
+
+
+
 ### Maps
 ### WeakMaps
 ### Sets
