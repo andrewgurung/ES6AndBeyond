@@ -32,6 +32,28 @@ Representing a base-10 number `3085`:
 8-bits little-endian / hexadecimal: 0000110100001100 / 0d0c
 8-bits big-endian / hexadecimal: 0000110000001101 / 0c0d
 
+Test for Endianness:
+
+```js
+var littleEndian = (function() {
+    var buffer = new ArrayBuffer( 2 );
+    new DataView( buffer ).setInt16( 0, 256, true );
+    return new Int16Array( buffer )[0] === 256;
+})();
+```
+
+#### Multiple Views
+A single buffer can have multiple views attached to it.
+
+```js
+var buf = new ArrayBuffer(2); // 2 bytes = 16 bits
+var view8 = new Uint8Array(buf); // Array with 2 buckets
+var view16 = new Uint16Array(buf); // Array with 1 bucket
+
+view16[0] = 3085;
+view8[0]; // 13
+view8[1]; // 12
+```
 
 
 ### Maps
