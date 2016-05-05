@@ -53,6 +53,9 @@ var view16 = new Uint16Array(buf); // Array with 1 bucket
 view16[0] = 3085;
 view8[0]; // 13
 view8[1]; // 12
+
+view8[0].toString( 16 ); // "d"
+view8[1].toString( 16 ); // "c"
 ```
 
 
