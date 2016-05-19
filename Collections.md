@@ -58,6 +58,20 @@ view8[0].toString( 16 ); // "d"
 view8[1].toString( 16 ); // "c"
 ```
 
+#### TypedArray Constructors
+- [constructor](length): Creates a new view over a new buffer of length bytes
+
+```js
+var a = new Int32Array( 3 );
+a[0] = 10;
+a[1] = 20;
+a[2] = 30;
+
+a.map( function(v){
+    console.log( v );
+} );
+// 10 20 30
+```
 
 ### Maps
 ### WeakMaps
