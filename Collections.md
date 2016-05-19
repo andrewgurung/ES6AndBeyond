@@ -28,9 +28,9 @@ console.log(arr8.length);  // 32  [256/8 bucket]
 - Little-endian is the most common representation on web these days but doesn't guarantee in all browsers
 
 Representing a base-10 number `3085`:
-16-bits binary (Regardless of Endianness) / hexadecimal: 0000110000001101  / 0c0d
-8-bits little-endian / hexadecimal: 0000110100001100 / 0d0c
-8-bits big-endian / hexadecimal: 0000110000001101 / 0c0d
+- 16-bits binary (Regardless of Endianness) / hexadecimal: 0000110000001101  / 0c0d
+- 8-bits little-endian / hexadecimal: 0000110100001100 / 0d0c
+- 8-bits big-endian / hexadecimal: 0000110000001101 / 0c0d
 
 Test for Endianness:
 
