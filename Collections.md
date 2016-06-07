@@ -74,6 +74,73 @@ a.map( function(v){
 ```
 
 ### Maps
+- JavaScript objects has an inability to use non-string value as the `key` to imitate Maps(key/value pair)
+- Maps in ES6 gets rid of this inability
+
+#### Before ES6
+- `x` and `y` both stringify to "[object Object]" and is stored in the same key
+
+```js
+var m = {};
+var x = {id: 1};
+var y = {id: 2};
+
+m[x] = "foo";
+m[y] = "bar";
+
+console.log(m[x]); // bar
+console.log(m[y]); // bar
+```
+
+#### ES6 Maps
+- Setting and retrieving values: `get()` and `set()`
+- To delete an element: `delete()`
+- To clear entire map's content: `clear()`
+- To get the length of a map: `size()`
+
+```js
+var m = new Map();
+var x = {id: 1};
+var y = {id: 2};
+
+m.set(x, "foo");
+m.set(y, "bar");
+
+console.log(m.get(x)); // foo
+console.log(m.get(y)); // bar
+
+m.set( x, "foo" );
+m.set( y, "bar" );
+m.size;                         // 2
+
+m.clear();
+m.size;                         // 0
+```
+
+#### Map in constructor form
+
+```js
+var x = { id: 1 },
+    y = { id: 2 };
+
+var m = new Map( [
+    [ x, "foo" ],
+    [ y, "bar" ]
+] );
+
+m.get( x );                     // "foo"
+m.get( y );                     // "bar"
+```
+
+*Note: Map can also receive an iterable as below*
+
+```js
+var m2 = new Map( m.entries() );
+
+// same as:
+var m2 = new Map( m );
+```
+
 ### WeakMaps
 ### Sets
 ### WeakSets
